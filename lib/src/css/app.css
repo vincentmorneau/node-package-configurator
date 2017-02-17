@@ -1,0 +1,132 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin-bottom: 0;
+    background-color: #e0e0e0;
+}
+
+main {
+    flex: 1 0 auto;
+    margin-top: 2rem;
+}
+
+#configurator {
+    padding: 1rem;
+}
+
+i.tooltipped {
+    cursor: help;
+    font-size: inherit;
+    color: inherit;
+    margin-right: .5rem;
+}
+
+nav .nav-wrapper i {
+    height: inherit;
+    line-height: inherit;
+}
+
+nav .brand-logo {
+    position: relative;
+}
+
+nav .button-collapse {
+    margin-right: 18px;
+}
+
+table.object
+, table.object>tbody, table.object>tbody>tr, table.object>tbody>tr>td {
+    display: block;
+}
+
+sup {
+    display: none;
+}
+
+.collapsible-header {
+    cursor: default;
+    background-color: #fafafa;
+}
+
+.collapsible-header>label {
+    font-size: inherit;
+    color: inherit;
+}
+
+form.brutusin-form td.item-index {
+    font-size: .8em;
+    color: #d3d3d3;
+    width: 25px;
+    text-align: right;
+}
+
+form.brutusin-form td.item-action {
+    width: 30px;
+}
+
+td.prop-name {
+    padding: 10px 5px 5px 5px;
+}
+
+td.prop-value {
+    padding: 0px 10px;
+}
+
+.item td  {
+    padding: 0 5px;
+}
+
+table.array td.item-value input {
+    margin: 0 0 5px 0;
+}
+
+table.array td.item-action .btn {
+    padding: 0 1rem;
+}
+
+button[title='File'] {
+    margin: 1rem 0;
+}
+
+input:not([type]).error
+, input:not([type]):focus.error
+, input[type=text].error
+, input[type=text]:focus.error
+, input[type=password].error
+, input[type=password]:focus.error
+, input[type=email].error
+, input[type=email]:focus.error
+, input[type=url].error
+, input[type=url]:focus.error
+, input[type=time].error
+, input[type=time]:focus.error
+, input[type=date].error
+, input[type=date]:focus.error
+, input[type=datetime].error
+, input[type=datetime]:focus.error
+, input[type=datetime-local].error
+, input[type=datetime-local]:focus.error
+, input[type=tel].error
+, input[type=tel]:focus.error
+, input[type=number].error
+, input[type=number]:focus.error
+, input[type=search].error
+, input[type=search]:focus.error
+, textarea.materialize-textarea.error
+, textarea.materialize-textarea:focus.error {
+    border-bottom: 1px solid #F44336;
+    box-shadow: 0 1px 0 0 #F44336;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-container.error:after {
+    content: attr(data-error);
+    position: absolute;
+    top: 45px;
+    left: 0;
+    color: #F44336;
+}

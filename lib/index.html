@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JSON Schema Local Configurator</title>
+
+        <meta charset="utf-8">
+        <meta name="author" content="Vincent Morneau">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.9.0/css/alertify.min.css"/>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.9.0/css/themes/default.min.css"/>
+
+        <link rel="stylesheet" type="text/css" href="css/app.css">
+
+        <style type="text/css">
+            .primary-color-bg {
+                background-color: {{nvl primaryColor '#023366'}} !important;
+            }
+
+            .primary-color-text {
+                color: {{nvl primaryColor '#023366'}} !important;
+            }
+
+            .secondary-color-bg {
+                background-color: {{nvl secondaryColor '#0899FF'}} !important;
+            }
+
+            .secondary-color-text, .collapsible-header i {
+                color: {{nvl secondaryColor '#0899FF'}}!important;
+            }
+
+            [type="checkbox"]:checked+label:before {
+                border-right: 2px solid {{nvl secondaryColor '#0899FF'}};
+                border-bottom: 2px solid {{nvl secondaryColor '#0899FF'}};
+            }
+
+            {{#ifCond projectArray.length '>' 1}}
+            header, main, footer {
+                padding-left: 300px;
+            }
+
+            @media only screen and (max-width : 992px) {
+                header, main, footer {
+                    padding-left: 0;
+                }
+            }
+            {{/ifCond}}
+        </style>
+    </head>
+
+    <body>
+        <!-- Header -->
+        <header>
+            <nav class="primary-color-bg" role="navigation">
+                <div class="nav-wrapper container">
+                    {{#ifCond projectArray.length '>' 1}}
+                    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+                    {{/ifCond}}
+                    <span class="brand-logo left">{{module}}<span class="project-title">{{#if project}} - {{project}}{{/if}}</span></span>
+                    <ul class="right">
+                        <li>
+                            <div class="buttons">{{> buttons }}</div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            {{#ifCond projectArray.length '>' 1}}
+            <ul id="slide-out" class="side-nav fixed">
+                {{#each projectArray}}
+                <li {{#ifCond ../project '==' this}}class="active"{{/ifCond}}><a href="javascript:void(0);" class="project" data-project="{{this}}">{{this}}</a></li>
+                {{/each}}
+            </ul>
+            {{/ifCond}}
+        </header>
+        <!-- / Header -->
+
+        <!-- / Main -->
+        <main>
+            <div class="container">
+                <div class="row">
+                    <input id="active-project" type="hidden" value="{{project}}">
+                    <div id="configurator" class="card">
+                        <h4>Select a project.</h4>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- / Main -->
+
+        <!-- Footer -->
+        <footer class="page-footer primary-color-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m6">
+                        <h5 class="white-text">{{module}}<span class="project-title">{{#if project}} - {{project}}{{/if}}</span></h5>
+                        <p class="grey-text text-lighten-4">Powered by <a href="#">JSON Schema Local Configurator</a></p>
+                    </div>
+                    <div class="col s12 m6 right-align">
+                        <div class="buttons">{{> buttons }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12">
+                            © 2017 JSON Schema Local Configurator
+                            <span class="grey-text text-lighten-4 right">MIT License</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- / Footer -->
+
+        <script type="text/javascript" src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/bf.js"></script>
+        <script type="text/javascript" src="js/bf-jsc.js"></script>
+        <script type="text/javascript" src="js/decorator.js"></script>
+        <script type="text/javascript">
+            var schema = new Object()
+            var BrutusinForms = brutusin["json-forms"];
+            var bf = BrutusinForms.create({{{nvl jsonSchema '{}'}}});
+            var container = document.getElementById('configurator');
+
+            $("#configurator").html("");
+            bf.render(container, {{{nvl initialData '{}'}}});
+        </script>
+        <script type="text/javascript" src="js/jsc.js"></script>
+        <script type="text/javascript" src="//cdn.jsdelivr.net/alertifyjs/1.9.0/alertify.min.js"></script>
+    </body>
+</html>
