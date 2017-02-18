@@ -1,4 +1,4 @@
-# APEX Publish Static Files
+# JSON Schema Local Configurator
 
 Receives a JSON Schema, deploys an HTML form and saves it locally.
 
