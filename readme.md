@@ -2,8 +2,7 @@
 
 Receives a JSON Schema, deploys an HTML form and saves it locally.
 
-TODO
-![demo](/docs/demo.gif)
+![demo](/docs/demo.png)
 
 ## Install
 ```

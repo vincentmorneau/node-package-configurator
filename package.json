@@ -1,16 +1,22 @@
 {
   "name": "json-local-configurator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Vincent Morneau",
-  "description": "",
+  "description": "Receives a JSON Schema, deploys an HTML form and saves it locally.",
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+      "json",
+      "json-schema",
+      "config",
+      "javascript",
+      "nodejs"
+  ],
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/vincentmorneau/json-local-configurator.git"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/vincentmorneau/json-local-configurator/issues"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
