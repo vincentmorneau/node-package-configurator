@@ -38,5 +38,8 @@ getProjects | function | array | Returns an array of available project names
 ## Changelog
 [See changelog.](changelog.md)
 
-## Project Team
+## Created by
 - [Vincent Morneau](https://github.com/vincentmorneau)
+
+## Thanks to
+[Brutusin json-forms](https://github.com/brutusin/json-forms)

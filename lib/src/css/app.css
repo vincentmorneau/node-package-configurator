@@ -85,7 +85,11 @@ table.array td.item-action .btn {
     padding: 0 1rem;
 }
 
-button[title='File'] {
+.array ~ .btn {
+    margin: 1rem 0;
+}
+
+.array tbody {
     margin: 1rem 0;
 }
 
