@@ -36,8 +36,8 @@
 	},
 	"xo": {
 		"ignores": [
-			"lib\\src\\js\\*.js",
-			"lib\\handlebars.js"
+			"lib/src/js/*.js",
+			"lib/handlebars.js"
 		]
 	}
 }
