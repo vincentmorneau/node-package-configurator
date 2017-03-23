@@ -13,8 +13,8 @@ npm install json-local-configurator
 
 ## Usage
 ```javascript
-var configurator = require("json-local-configurator"),
-    schema = require('../templates/schema');
+const configurator = require('json-local-configurator');
+const schema = require('../templates/schema');
 
 configurator.init({
     module: "my-module",
