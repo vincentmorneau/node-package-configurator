@@ -13,6 +13,8 @@ const util = require('./lib/util');
 const app = express();
 
 const localhost = '127.0.0.1';
+const portStart = 3000;
+const portEnd = 3999;
 
 const writeConfig = function (module, config) {
 	const modulePath = util.getLocalUserConfigPath(module);
@@ -63,11 +65,11 @@ module.exports = {
         // Serve static files
 		app.use(express.static(path.join(__dirname, 'lib/src')));
 
-		const userConfig = util.getLocalUserConfig(opts.module);
-		const result = handlebars.compile(userConfig, opts);
-
         // Get json form
 		app.get('/', (req, res) => {
+			const userConfig = this.getConfig(opts.module);
+			const result = handlebars.compile(userConfig, opts);
+
 			res.writeHead(200, {
 				'Content-Type': 'text/html',
 				'Content-Length': result.length
@@ -79,10 +81,12 @@ module.exports = {
         // Get project data
 		app.get('/project/:projectName', (req, res) => {
 			try {
+				const userConfig = this.getConfig(opts.module);
+
 				res.send({
 					success: true,
 					config: userConfig[req.params.projectName],
-					buttons: handlebars.buttons(userConfig[req.params.projectName])
+					buttons: handlebars.buttons(true)
 				});
 			} catch (err) {
 				res.send({success: false, message: err});
@@ -92,10 +96,15 @@ module.exports = {
         // Save project
 		app.post('/save', (req, res) => {
 			try {
+				let userConfig = this.getConfig(opts.module);
                 // Overwritting the current project in the main config object
 				userConfig[req.body.project] = req.body.config;
 				writeConfig(opts.module, userConfig);
-				res.send({success: true});
+				res.send({
+					success: true,
+					buttons: handlebars.buttons(true),
+					menu: util.getMenu(this.getProjects(opts.module), req.body.project)
+				});
 			} catch (err) {
 				res.send({success: false, message: err});
 			}
@@ -104,11 +113,13 @@ module.exports = {
         // Delete project
 		app.post('/delete', (req, res) => {
 			try {
+				let userConfig = this.getConfig(opts.module);
 				delete userConfig[req.body.project];
 				writeConfig(opts.module, userConfig);
 				res.send({
 					success: true,
-					buttons: handlebars.buttons()
+					buttons: handlebars.buttons(false),
+					menu: util.getMenu(this.getProjects(opts.module), req.body.project)
 				});
 			} catch (err) {
 				console.error(err);
@@ -117,7 +128,7 @@ module.exports = {
 		});
 
         // Listen and open express server with an available port
-		portscanner.findAPortNotInUse(3000, 3999, localhost, (error, port) => {
+		portscanner.findAPortNotInUse(portStart, portEnd, localhost, (error, port) => {
 			app.listen(port, () => {
 				opn('http://localhost:' + port);
 			});
@@ -130,6 +141,7 @@ module.exports = {
 		if (project) {
 			return config[project];
 		}
+
 		return config;
 	},
 
