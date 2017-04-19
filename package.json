@@ -23,15 +23,15 @@
   },
   "dependencies": {
     "body-parser": "^1.15.2",
-    "express": "4.14.x",
+    "express": "4.15.x",
     "handlebars": "^4.0.6",
     "node.extend": "1.1.x",
-    "object-assign": "^4.1.1",
     "opn": "^4.0.2",
-    "portscanner": "^2.1.0"
+    "portscanner": "^2.1.0",
+    "json-mapping": "^1.0.0"
   },
   "devDependencies": {
-    "ava": "^0.18.2",
+    "ava": "^0.19.1",
     "xo": "^0.18.0"
   },
   "xo": {

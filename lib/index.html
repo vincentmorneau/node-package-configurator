@@ -36,18 +36,6 @@
                 border-right: 2px solid {{nvl secondaryColor '#0899FF'}};
                 border-bottom: 2px solid {{nvl secondaryColor '#0899FF'}};
             }
-
-            {{#ifCond projectArray.length '>' 1}}
-            header, main, footer {
-                padding-left: 300px;
-            }
-
-            @media only screen and (max-width : 992px) {
-                header, main, footer {
-                    padding-left: 0;
-                }
-            }
-            {{/ifCond}}
         </style>
     </head>
 
@@ -56,9 +44,7 @@
         <header>
             <nav class="primary-color-bg" role="navigation">
                 <div class="nav-wrapper container">
-                    {{#ifCond projectArray.length '>' 1}}
                     <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-                    {{/ifCond}}
                     <span class="brand-logo left">{{module}}<span class="project-title">{{#if project}} - {{project}}{{/if}}</span></span>
                     <ul class="right">
                         <li>
@@ -67,13 +53,28 @@
                     </ul>
                 </div>
             </nav>
-            {{#ifCond projectArray.length '>' 1}}
             <ul id="slide-out" class="side-nav fixed">
+				<li><a class="subheader">Actions</a></li>
+				<li><a class="import"><i class="material-icons">cloud_download</i>
+					<div class="file-field input-field">
+					  <div class="">
+						<span>Import</span>
+						<input id="import" type="file">
+					  </div>
+					  <div class="file-path-wrapper">
+						<input class="file-path validate" type="text">
+					  </div>
+					</div>
+				</a></li>
+				<li><a class="export"><i class="material-icons">cloud_upload</i>Export</a></li>
+				{{#ifCond projectArray.length '>' 1}}
+				<li><div class="divider"></div></li>
+				<li><a class="subheader">Available Projects</a></li>
                 {{#each projectArray}}
                 <li {{#ifCond ../project '==' this}}class="active"{{/ifCond}}><a href="javascript:void(0);" class="project" data-project="{{this}}">{{this}}</a></li>
                 {{/each}}
+				{{/ifCond}}
             </ul>
-            {{/ifCond}}
         </header>
         <!-- / Header -->
 
@@ -117,6 +118,7 @@
         <!-- / Footer -->
 
         <script type="text/javascript" src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
         <script type="text/javascript" src="js/bf.js"></script>
         <script type="text/javascript" src="js/bf-jsc.js"></script>
@@ -127,7 +129,7 @@
             var bf = BrutusinForms.create({{{nvl jsonSchema '{}'}}});
             var container = document.getElementById('configurator');
 
-            $("#configurator").html("");
+            $(container).html("");
             bf.render(container, {{{nvl initialData '{}'}}});
         </script>
         <script type="text/javascript" src="js/jsc.js"></script>

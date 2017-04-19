@@ -1,8 +1,8 @@
 import test from 'ava';
-import configurator from '.';
+import _app from '.';
 
 test('configurator', t => {
-	configurator.init({
+	_app.init({
 		module: 'afeb',
 		project: 'demo',
 		jsonSchema: {
