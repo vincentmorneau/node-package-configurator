@@ -25,8 +25,8 @@
     "body-parser": "^1.15.2",
     "express": "4.15.x",
     "handlebars": "^4.0.6",
-    "node.extend": "1.1.x",
-    "opn": "^4.0.2",
+    "node.extend": "~2.0.0",
+    "opn": "^5.0.0",
     "portscanner": "^2.1.0",
     "json-mapping": "^1.0.0"
   },
