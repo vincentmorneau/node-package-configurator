@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>JSON Schema Local Configurator</title>
+        <title>JSON Local Configurator</title>
 
         <meta charset="utf-8">
         <meta name="author" content="Vincent Morneau">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
 
         <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.9.0/css/alertify.min.css"/>
         <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.9.0/css/themes/default.min.css"/>
@@ -97,7 +97,7 @@
                 <div class="row">
                     <div class="col s12 m6">
                         <h5 class="white-text">{{module}}<span class="project-title">{{#if project}} - {{project}}{{/if}}</span></h5>
-                        <p class="grey-text text-lighten-4">Powered by <a href="#">JSON Schema Local Configurator</a></p>
+                        <p class="grey-text text-lighten-4">Powered by <a href="#">JSON Local Configurator</a></p>
                     </div>
                     <div class="col s12 m6 right-align">
                         <div class="buttons">{{> buttons }}</div>
@@ -108,7 +108,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col s12">
-                            © 2017 JSON Schema Local Configurator
+                            © JSON Local Configurator
                             <span class="grey-text text-lighten-4 right">MIT License</span>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
 
         <script type="text/javascript" src="//code.jquery.com/jquery-2.2.4.min.js"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
         <script type="text/javascript" src="js/bf.js"></script>
         <script type="text/javascript" src="js/bf-jsc.js"></script>
         <script type="text/javascript" src="js/decorator.js"></script>
@@ -130,7 +130,7 @@
             var container = document.getElementById('configurator');
 
             $(container).html("");
-            bf.render(container, {{{nvl initialData '{}'}}});
+            bf.render(container, {});
         </script>
         <script type="text/javascript" src="js/jsc.js"></script>
         <script type="text/javascript" src="//cdn.jsdelivr.net/alertifyjs/1.9.0/alertify.min.js"></script>

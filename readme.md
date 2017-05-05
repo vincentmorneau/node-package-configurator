@@ -1,4 +1,4 @@
-# JSON Schema Local Configurator
+# JSON Local Configurator
 
 [![npm](https://img.shields.io/npm/v/json-local-configurator.svg)]() [![Build Status](https://travis-ci.org/vincentmorneau/json-local-configurator.svg?branch=master)](https://travis-ci.org/vincentmorneau/json-local-configurator) [![Dependency Status](https://david-dm.org/vincentmorneau/json-local-configurator.svg)](https://david-dm.org/vincentmorneau/json-local-configurator) [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
