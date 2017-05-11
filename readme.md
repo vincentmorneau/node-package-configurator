@@ -17,7 +17,7 @@ const configurator = require('json-local-configurator');
 const schema = require('../templates/schema');
 
 configurator.init({
-    module: "my-module",
+    modules: ["my-module"],
     project: "my-project",
     jsonSchema: schema
 });
@@ -26,7 +26,7 @@ configurator.init({
 ## Options
 Name | Type | Default | Description
 --- | --- | --- | ---
-module | string | | Name of the module
+module | array | | List of module names, in order of priority.
 project | string | Default | Name of the project
 jsonSchema | object | | JSON Schema to use in the form
 
