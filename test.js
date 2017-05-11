@@ -3,7 +3,7 @@ import _app from '.';
 
 test('configurator', t => {
 	_app.init({
-		module: 'afeb',
+		modules: ['apex-nitro', 'afeb'],
 		project: 'demo',
 		jsonSchema: {
 			$schema: 'http://json-schema.org/draft-04/schema#',

@@ -1,6 +1,5 @@
 'use strict';
 
-const fs = require('fs');
 const path = require('path');
 const opn = require('opn');
 const bodyParser = require('body-parser');
@@ -16,15 +15,6 @@ const localhost = '127.0.0.1';
 const portStart = 3000;
 const portEnd = 3999;
 
-const writeConfig = function (module, config) {
-	// Gets the local path for where to save the config
-	const modulePath = util.getLocalUserConfigPath(module);
-	// Ensure that the config directory exists
-	util.makeDirectoryStructure(modulePath);
-	// Writing to config with the new data
-	fs.writeFileSync(modulePath, JSON.stringify(config, null, 4));
-};
-
 module.exports = {
 	init(opts) {
 		// Set defaults
@@ -35,8 +25,12 @@ module.exports = {
 		opts = Object.assign(defaults, opts);
 
 		// Validate arguments
-		if (typeof opts.module === 'undefined') {
-			throw new TypeError('module is required.');
+		if (!Array.isArray(opts.modules)) {
+			throw new TypeError('modules should be an array.');
+		}
+
+		if (opts.modules.length === 0) {
+			throw new TypeError('modules should contain at least one value.');
 		}
 
 		if (typeof opts.jsonSchema === 'undefined') {
@@ -59,7 +53,7 @@ module.exports = {
 		// Get json form
 		app.get('/', (req, res) => {
 			const configs = this.getConfig({
-				module: opts.module
+				modules: opts.modules
 			});
 			const result = handlebars.compile(configs, opts);
 
@@ -75,7 +69,7 @@ module.exports = {
 		app.get('/project/:projectName', (req, res) => {
 			try {
 				const config = this.getConfig({
-					module: opts.module,
+					modules: opts.modules,
 					project: req.params.projectName,
 					mapping: opts.mapping
 				});
@@ -97,16 +91,16 @@ module.exports = {
 		app.post('/save', (req, res) => {
 			try {
 				const configs = this.getConfig({
-					module: opts.module
+					modules: opts.modules
 				});
 				// Overwritting the current project in the main config object
 				configs[req.body.project] = req.body.config;
-				writeConfig(opts.module, configs);
+				util.writeConfig(opts.modules[0], configs);
 				res.send({
 					success: true,
 					buttons: handlebars.buttons(true),
 					menu: util.getMenu(this.getProjects({
-						module: opts.module
+						modules: opts.modules
 					}), req.body.project)
 				});
 			} catch (err) {
@@ -121,15 +115,15 @@ module.exports = {
 		app.post('/delete', (req, res) => {
 			try {
 				const configs = this.getConfig({
-					module: opts.module
+					modules: opts.modules
 				});
 				delete configs[req.body.project];
-				writeConfig(opts.module, configs);
+				util.writeConfig(opts.modules[0], configs);
 				res.send({
 					success: true,
 					buttons: handlebars.buttons(false),
 					menu: util.getMenu(this.getProjects({
-						module: opts.module
+						modules: opts.modules
 					}), req.body.project)
 				});
 			} catch (err) {
@@ -157,12 +151,16 @@ module.exports = {
 		opts = Object.assign(defaults, opts);
 
 		// Validate arguments
-		if (typeof opts.module === 'undefined') {
-			throw new TypeError('module is required.');
+		if (!Array.isArray(opts.modules)) {
+			throw new TypeError('modules should be an array.');
+		}
+
+		if (opts.modules.length === 0) {
+			throw new TypeError('modules should contain at least one value.');
 		}
 
 		// Get the local config
-		const configs = util.getLocalUserConfig(opts.module);
+		const configs = util.getLocalUserConfig(opts.modules);
 
 		// If project is provided, let's return this project config
 		// otherwise let's return all projects configs
@@ -179,11 +177,15 @@ module.exports = {
 
 	getProjects(opts) {
 		// Validate arguments
-		if (typeof opts.module === 'undefined') {
-			throw new TypeError('module is required.');
+		if (!Array.isArray(opts.modules)) {
+			throw new TypeError('modules should be an array.');
 		}
 
-		const configs = util.getLocalUserConfig(opts.module);
+		if (opts.modules.length === 0) {
+			throw new TypeError('modules should contain at least one value.');
+		}
+
+		const configs = util.getLocalUserConfig(opts.modules);
 
 		return Object.keys(configs);
 	}

@@ -22,16 +22,16 @@
     "url": "https://github.com/vincentmorneau/json-local-configurator/issues"
   },
   "dependencies": {
-    "body-parser": "^1.15.2",
+    "body-parser": "1.17.x",
     "express": "4.15.x",
-    "handlebars": "^4.0.6",
-    "opn": "^5.0.0",
-    "portscanner": "^2.1.0",
+    "handlebars": "4.0.x",
+    "opn": "5.0.x",
+    "portscanner": "2.1.x",
     "json-mapping": "1.1.x"
   },
   "devDependencies": {
-    "ava": "^0.19.1",
-    "xo": "^0.18.0"
+    "ava": "0.19.x",
+    "xo": "0.18.x"
   },
   "xo": {
     "ignores": [
