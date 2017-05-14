@@ -9,7 +9,7 @@ test('configurator', t => {
 			$schema: 'http://json-schema.org/draft-04/schema#',
 			type: 'object',
 			title: 'Root',
-			description: 'Configuration for an APEX Front-End Boost project',
+			description: 'Configuration for a project',
 			properties: {
 				appURL: {
 					type: 'string',
