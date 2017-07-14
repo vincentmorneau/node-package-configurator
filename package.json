@@ -30,7 +30,7 @@
     "json-mapping": "1.1.x"
   },
   "devDependencies": {
-    "ava": "0.20.x",
+    "ava": "0.21.x",
     "xo": "0.18.x"
   },
   "xo": {
