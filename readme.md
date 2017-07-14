@@ -1,23 +1,26 @@
-# JSON Local Configurator
+# Node Package Configurator
 
-[![npm](https://img.shields.io/npm/v/json-local-configurator.svg)]() [![Build Status](https://travis-ci.org/vincentmorneau/json-local-configurator.svg?branch=master)](https://travis-ci.org/vincentmorneau/json-local-configurator) [![Dependency Status](https://david-dm.org/vincentmorneau/json-local-configurator.svg)](https://david-dm.org/vincentmorneau/json-local-configurator) [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
+[![npm](https://img.shields.io/npm/v/node-package-configurator.svg)]() [![Build Status](https://travis-ci.org/vincentmorneau/node-package-configurator.svg?branch=master)](https://travis-ci.org/vincentmorneau/node-package-configurator) [![Dependency Status](https://david-dm.org/vincentmorneau/node-package-configurator.svg)](https://david-dm.org/vincentmorneau/node-package-configurator) [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
-Receives a JSON Schema, deploys an HTML form and saves it locally.
+Allows you to store local configuration files for your Node.js packages.
 
 ![demo](/docs/demo.png)
 
+Sometimes your Node.js packages require developers to provide personal preferences. Node Package Configurator generates a dynamic form which can be filled easily and then saved locally which allows to have persistent storage.
+
 ## Install
 ```
-npm install json-local-configurator
+npm install node-package-configurator
 ```
 
 ## Usage
 ```javascript
-const configurator = require('json-local-configurator');
+const configurator = require('node-package-configurator');
 const schema = require('../templates/schema');
 
 configurator.init({
     modules: ["my-module"],
+    logo: "url",
     project: "my-project",
     jsonSchema: schema
 });
@@ -27,7 +30,8 @@ configurator.init({
 Name | Type | Default | Description
 --- | --- | --- | ---
 module | array | | List of module names, in order of priority.
-project | string | Default | Name of the project
+logo | string | | URL to your project logo (optional)
+project | string | | Name of the project
 jsonSchema | object | | JSON Schema to use in the form
 
 ## Methods

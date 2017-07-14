@@ -25,12 +25,12 @@
     "body-parser": "1.17.x",
     "express": "4.15.x",
     "handlebars": "4.0.x",
-    "opn": "5.0.x",
+    "opn": "5.1.x",
     "portscanner": "2.1.x",
     "json-mapping": "1.1.x"
   },
   "devDependencies": {
-    "ava": "0.19.x",
+    "ava": "0.20.x",
     "xo": "0.18.x"
   },
   "xo": {
