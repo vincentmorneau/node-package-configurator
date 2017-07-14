@@ -15,10 +15,10 @@ npm install node-package-configurator
 
 ## Usage
 ```javascript
-const configurator = require('node-package-configurator');
+const npc = require('node-package-configurator');
 const schema = require('../templates/schema');
 
-configurator.init({
+npc.init({
     modules: ["my-module"],
     logo: "url",
     project: "my-project",
