@@ -1,5 +1,5 @@
 {
-  "name": "json-local-configurator",
+  "name": "node-package-configurator",
   "version": "1.2.1",
   "author": "Vincent Morneau",
   "description": "Receives a JSON Schema, deploys an HTML form and saves it locally.",
@@ -16,10 +16,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/vincentmorneau/json-local-configurator.git"
+    "url": "https://github.com/vincentmorneau/node-package-configurator.git"
   },
   "bugs": {
-    "url": "https://github.com/vincentmorneau/json-local-configurator/issues"
+    "url": "https://github.com/vincentmorneau/node-package-configurator/issues"
   },
   "dependencies": {
     "body-parser": "1.17.x",
