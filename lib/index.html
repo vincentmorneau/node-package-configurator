@@ -1,60 +1,65 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>JSON Local Configurator</title>
+	<head>
+		<title>Node Package Configurator</title>
 
-        <meta charset="utf-8">
-        <meta name="author" content="Vincent Morneau">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
+		<meta name="author" content="Vincent Morneau">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
 
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.9.0/css/alertify.min.css"/>
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.9.0/css/themes/default.min.css"/>
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.9.0/css/alertify.min.css"/>
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.9.0/css/themes/default.min.css"/>
 
-        <link rel="stylesheet" type="text/css" href="css/app.css">
+		<link rel="stylesheet" type="text/css" href="css/app.css">
 
-        <style type="text/css">
-            .primary-color-bg {
-                background-color: {{nvl primaryColor '#023366'}} !important;
-            }
+		<style type="text/css">
+			.primary-color-bg {
+				background-color: {{nvl primaryColorBG '#023366'}}!important;
+			}
 
-            .primary-color-text {
-                color: {{nvl primaryColor '#023366'}} !important;
-            }
+			.primary-color-text {
+				color: {{nvl primaryColorText '#000'}}!important;
+			}
 
-            .secondary-color-bg {
-                background-color: {{nvl secondaryColor '#0899FF'}} !important;
-            }
+			.secondary-color-bg {
+				background-color: {{nvl secondaryColorBG '#0899FF'}}!important;
+			}
 
-            .secondary-color-text, .collapsible-header i {
-                color: {{nvl secondaryColor '#0899FF'}}!important;
-            }
+			.secondary-color-text {
+				color: {{nvl secondaryColorText '#0899FF'}}!important;
+			}
 
-            [type="checkbox"]:checked+label:before {
-                border-right: 2px solid {{nvl secondaryColor '#0899FF'}};
-                border-bottom: 2px solid {{nvl secondaryColor '#0899FF'}};
-            }
-        </style>
-    </head>
+			[type="checkbox"]:checked+label:before {
+				border-right: 2px solid {{nvl secondaryColorBG '#0899FF'}};
+				border-bottom: 2px solid {{nvl secondaryColorBG '#0899FF'}};
+			}
+		</style>
+	</head>
 
-    <body>
-        <!-- Header -->
-        <header>
-            <nav class="primary-color-bg" role="navigation">
-                <div class="nav-wrapper container">
-                    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-                    <span class="brand-logo left">{{module}}<span class="project-title">{{#if project}} - {{project}}{{/if}}</span></span>
-                    <ul class="right">
-                        <li>
-                            <div class="buttons">{{> buttons }}</div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <ul id="slide-out" class="side-nav fixed">
+	<body>
+		<!-- Header -->
+		<header>
+			<nav class="primary-color-bg" role="navigation">
+				<div class="nav-wrapper container">
+					<a href="#" data-activates="slide-out" class="button-collapse secondary-color-text"><i class="material-icons">menu</i></a>
+					{{#if logo}}
+						<div class="brand-logo logo-img"><img src="{{logo}}" class="responsive-img"></div>
+					{{else}}
+						<span class="brand-logo left">{{module}}</span>
+					{{/if}}
+					<ul class="right">
+						<li>
+							<div class="buttons">{{> buttons }}</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<ul id="slide-out" class="side-nav fixed">
 				<li><a class="subheader">Actions</a></li>
+				<li><a class="create"><i class="material-icons">add</i>Add new project</a></li>
 				<li><a class="import"><i class="material-icons">cloud_download</i>
 					<div class="file-field input-field">
 					  <div class="">
@@ -70,69 +75,78 @@
 				{{#ifCond projectArray.length '>' 1}}
 				<li><div class="divider"></div></li>
 				<li><a class="subheader">Available Projects</a></li>
-                {{#each projectArray}}
-                <li {{#ifCond ../project '==' this}}class="active"{{/ifCond}}><a href="javascript:void(0);" class="project" data-project="{{this}}">{{this}}</a></li>
-                {{/each}}
+				{{#each projectArray}}
+				<li {{#ifCond ../project '==' this}}class="active"{{/ifCond}}><a href="javascript:void(0);" class="project" data-project="{{this}}">{{this}}</a></li>
+				{{/each}}
 				{{/ifCond}}
-            </ul>
-        </header>
-        <!-- / Header -->
+			</ul>
+		</header>
+		<!-- / Header -->
 
-        <!-- / Main -->
-        <main>
-            <div class="container">
-                <div class="row">
-                    <input id="active-project" type="hidden" value="{{project}}">
-                    <div id="configurator" class="card">
-                        <h4>Select a project.</h4>
-                    </div>
-                </div>
-            </div>
-        </main>
-        <!-- / Main -->
+		<!-- Main -->
+		<main>
+			<div class="container">
+				<div class="row card pa1">
+					<div class="col s12">
+						<div class="input-field">
+							<input id="original-project" type="hidden" value="{{project}}">
+							<input id="active-project" type="text" value="{{project}}">
+							<label for="active-project">Project Name</label>
+						</div>
+					</div>
+				</div>
+				<div class="row card pa1">
+					<div id="configurator">
+						<h4>Select a project.</h4>
+					</div>
+				</div>
+			</div>
+		</main>
+		<!-- / Main -->
 
-        <!-- Footer -->
-        <footer class="page-footer primary-color-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 m6">
-                        <h5 class="white-text">{{module}}<span class="project-title">{{#if project}} - {{project}}{{/if}}</span></h5>
-                        <p class="grey-text text-lighten-4">Powered by <a href="#">JSON Local Configurator</a></p>
-                    </div>
-                    <div class="col s12 m6 right-align">
-                        <div class="buttons">{{> buttons }}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copyright">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s12">
-                            © JSON Local Configurator
-                            <span class="grey-text text-lighten-4 right">MIT License</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- / Footer -->
+		<!-- Footer -->
+		<footer class="page-footer primary-color-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col s6">
+						{{#if logo}}
+							<img src="{{logo}}" class="responsive-img">
+						{{else}}
+							<h5 class="white-text">{{module}}</h5>
+						{{/if}}
+					</div>
+					<div class="col s6 right-align">
+						<div class="buttons">{{> buttons }}</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<div class="container">
+					<div class="col s12 primary-color-text">
+						© Node Package Configurator
+						<span class="right">MIT License</span>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- / Footer -->
 
-        <script type="text/javascript" src="//code.jquery.com/jquery-2.2.4.min.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-        <script type="text/javascript" src="js/bf.js"></script>
-        <script type="text/javascript" src="js/bf-jsc.js"></script>
-        <script type="text/javascript" src="js/decorator.js"></script>
-        <script type="text/javascript">
-            var schema = new Object()
-            var BrutusinForms = brutusin["json-forms"];
-            var bf = BrutusinForms.create({{{nvl jsonSchema '{}'}}});
-            var container = document.getElementById('configurator');
+		<script type="text/javascript" src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+		<script type="text/javascript" src="js/bf.js"></script>
+		<script type="text/javascript" src="js/bf-npc.js"></script>
+		<script type="text/javascript" src="js/decorator.js"></script>
+		<script type="text/javascript">
+			var schema = new Object()
+			var BrutusinForms = brutusin["json-forms"];
+			var bf = BrutusinForms.create({{{nvl jsonSchema '{}'}}});
+			var container = document.getElementById('configurator');
 
-            $(container).html("");
-            bf.render(container, {});
-        </script>
-        <script type="text/javascript" src="js/jsc.js"></script>
-        <script type="text/javascript" src="//cdn.jsdelivr.net/alertifyjs/1.9.0/alertify.min.js"></script>
-    </body>
+			$(container).html("");
+			bf.render(container, {});
+		</script>
+		<script type="text/javascript" src="js/npc.js"></script>
+		<script type="text/javascript" src="//cdn.jsdelivr.net/alertifyjs/1.9.0/alertify.min.js"></script>
+	</body>
 </html>

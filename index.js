@@ -19,9 +19,9 @@ module.exports = {
 	init(opts) {
 		// Set defaults
 		const defaults = {
-			project: 'Default',
 			mapping: []
 		};
+
 		opts = Object.assign(defaults, opts);
 
 		// Validate arguments
@@ -37,16 +37,14 @@ module.exports = {
 			throw new TypeError('jsonSchema is required.');
 		}
 
-		if (typeof opts.project === 'undefined') {
-			opts.project = 'Default';
-		}
-
 		// Support json encoded bodies
 		app.use(bodyParser.json());
+
 		// Support encoded bodies
 		app.use(bodyParser.urlencoded({
 			extended: true
 		}));
+
 		// Serve static files
 		app.use(express.static(path.join(__dirname, 'lib/src')));
 
@@ -74,10 +72,13 @@ module.exports = {
 					mapping: opts.mapping
 				});
 
+				// Send the response back
 				res.send({
 					success: true,
 					config,
-					buttons: handlebars.buttons(true)
+					buttons: handlebars.buttons({
+						deleteFlag: true
+					})
 				});
 			} catch (err) {
 				res.send({
@@ -93,12 +94,24 @@ module.exports = {
 				const configs = this.getConfig({
 					modules: opts.modules
 				});
+
+				// If the project name has changed, delete the original entry
+				if (req.body.originalProject !== req.body.project) {
+					delete configs[req.body.originalProject];
+				}
+
 				// Overwritting the current project in the main config object
 				configs[req.body.project] = req.body.config;
+
+				// Write the config to disk
 				util.writeConfig(opts.modules[0], configs);
+
+				// Send the response back
 				res.send({
 					success: true,
-					buttons: handlebars.buttons(true),
+					buttons: handlebars.buttons({
+						deleteFlag: true
+					}),
 					menu: util.getMenu(this.getProjects({
 						modules: opts.modules
 					}), req.body.project)
@@ -117,11 +130,20 @@ module.exports = {
 				const configs = this.getConfig({
 					modules: opts.modules
 				});
+
+				// Delete both original project and active project
+				delete configs[req.body.originalProject];
 				delete configs[req.body.project];
+
+				// Write the config to disk
 				util.writeConfig(opts.modules[0], configs);
+
+				// Send the response back
 				res.send({
 					success: true,
-					buttons: handlebars.buttons(false),
+					buttons: handlebars.buttons({
+						deleteFlag: false
+					}),
 					menu: util.getMenu(this.getProjects({
 						modules: opts.modules
 					}), req.body.project)
