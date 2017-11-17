@@ -2,11 +2,13 @@
 
 [![npm](https://img.shields.io/npm/v/node-package-configurator.svg)]() [![Build Status](https://travis-ci.org/vincentmorneau/node-package-configurator.svg?branch=master)](https://travis-ci.org/vincentmorneau/node-package-configurator) [![Dependency Status](https://david-dm.org/vincentmorneau/node-package-configurator.svg)](https://david-dm.org/vincentmorneau/node-package-configurator) [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
-Allows you to store local configuration files for your Node.js packages.
+Store local configuration for your npm packages.
 
 ![demo](/docs/demo.png)
 
-Sometimes your Node.js packages require developers to provide personal preferences. Node Package Configurator generates a dynamic form which can be filled easily and then saved locally which allows to have persistent storage.
+Sometimes your npm packages require developers to provide options or personal preferences. If those options are bundled with the npm package, you losse any changes upon updates the npm package.
+
+Node Package Configurator generates a dynamic form which can be filled easily and then saved locally for persistent storage.
 
 ## Install
 ```
