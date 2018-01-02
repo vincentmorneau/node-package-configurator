@@ -10,6 +10,8 @@ On Windows, npc saves the config file in the user App Data. Example: `C:\users\v
 On MacOS, npc saves the file in the library preference folder. Example: `~/Library/Preferences/yourModuleName`  
 On Linux, npc saves the file in the root folder. Example: `~/yourModuleName`  
 
+You can retrieve this file (your project configuration) at any time.
+
 ## Install
 ```
 npm install node-package-configurator
