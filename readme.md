@@ -6,9 +6,9 @@
 
 Node Package Configurator (npc) generates a dynamic web form out of a JSON schema. The user fills the forms, npc resolves the JSON schema into a JSON object, and saves the result locally for persistent storage.
 
-On Windows, npc saves the config file in the user App Data. Example: `C:\users\vmorneau\App Data\yourModuleName`
-On MacOS, npc saves the file in the library preference folder. Example: `~/Library/Preferences/yourModuleName`
-On Linux, npc saves the file in the root folder. Example: `~/yourModuleName`
+On Windows, npc saves the config file in the user App Data. Example: `C:\users\vmorneau\App Data\yourModuleName`  
+On MacOS, npc saves the file in the library preference folder. Example: `~/Library/Preferences/yourModuleName`  
+On Linux, npc saves the file in the root folder. Example: `~/yourModuleName`  
 
 ## Install
 ```
