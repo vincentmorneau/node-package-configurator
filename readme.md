@@ -1,6 +1,6 @@
 # Node Package Configurator
 
-[![npm](https://img.shields.io/npm/v/node-package-configurator.svg)]() [![Build Status](https://travis-ci.org/vincentmorneau/node-package-configurator.svg?branch=master)](https://travis-ci.org/vincentmorneau/node-package-configurator) [![Dependency Status](https://david-dm.org/vincentmorneau/node-package-configurator.svg)](https://david-dm.org/vincentmorneau/node-package-configurator) [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
+[![npm](https://img.shields.io/npm/v/node-package-configurator.svg)](https://www.npmjs.com/package/node-package-configurator) [![Build Status](https://travis-ci.org/vincentmorneau/node-package-configurator.svg?branch=master)](https://travis-ci.org/vincentmorneau/node-package-configurator) [![Dependency Status](https://david-dm.org/vincentmorneau/node-package-configurator.svg)](https://david-dm.org/vincentmorneau/node-package-configurator) [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
 ![demo](/docs/demo.png)
 
