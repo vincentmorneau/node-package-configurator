@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.3.3
+- Outputs the URL on the command line
+
 ### 1.3.0
 - Adds logo in the header bar
 - Allows to edit project name

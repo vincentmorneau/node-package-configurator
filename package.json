@@ -22,16 +22,16 @@
     "url": "https://github.com/vincentmorneau/node-package-configurator/issues"
   },
   "dependencies": {
-    "body-parser": "^1.18.1",
-    "express": "4.15.x",
-    "handlebars": "4.0.x",
-    "json-mapping": "1.1.x",
-    "opn": "5.1.x",
+    "body-parser": "^1.18.2",
+    "express": "4.16.x",
+    "handlebars": "^4.0.11",
+    "json-mapping": "^1.1.1",
+    "opn": "5.3.x",
     "portscanner": "2.1.x"
   },
   "devDependencies": {
-    "ava": "^0.22.0",
-    "xo": "0.18.x"
+    "ava": "^0.25.0",
+    "xo": "0.20.x"
   },
   "xo": {
     "ignores": [

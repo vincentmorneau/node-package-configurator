@@ -161,6 +161,7 @@ module.exports = {
 		portscanner.findAPortNotInUse(portStart, portEnd, localhost, (error, port) => {
 			app.listen(port, () => {
 				opn('http://localhost:' + port);
+				console.log('You can configure your project here: http://localhost:' + port);
 			});
 		});
 	},
