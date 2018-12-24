@@ -1,5 +1,6 @@
 'use strict';
 
+const fs = require('fs');
 const path = require('path');
 const opn = require('opn');
 const bodyParser = require('body-parser');
@@ -24,17 +25,16 @@ module.exports = {
 
 		opts = Object.assign(defaults, opts);
 
-		// Validate arguments
 		if (!Array.isArray(opts.modules)) {
-			throw new TypeError('modules should be an array.');
+			throw new TypeError('opts.modules should be an array.');
 		}
 
 		if (opts.modules.length === 0) {
-			throw new TypeError('modules should contain at least one value.');
+			throw new Error('opts.modules should contain at least one value.');
 		}
 
 		if (typeof opts.jsonSchema === 'undefined') {
-			throw new TypeError('jsonSchema is required.');
+			throw new TypeError('opts.jsonSchema is required.');
 		}
 
 		// Support json encoded bodies
@@ -80,10 +80,10 @@ module.exports = {
 						deleteFlag: true
 					})
 				});
-			} catch (err) {
+			} catch (error) {
 				res.send({
 					success: false,
-					message: err
+					message: error
 				});
 			}
 		});
@@ -104,7 +104,7 @@ module.exports = {
 				configs[req.body.project] = req.body.config;
 
 				// Write the config to disk
-				util.writeConfig(opts.modules[0], configs);
+				util.write(opts.modules[0], configs);
 
 				// Send the response back
 				res.send({
@@ -116,10 +116,10 @@ module.exports = {
 						modules: opts.modules
 					}), req.body.project)
 				});
-			} catch (err) {
+			} catch (error) {
 				res.send({
 					success: false,
-					message: err
+					message: error
 				});
 			}
 		});
@@ -136,7 +136,7 @@ module.exports = {
 				delete configs[req.body.project];
 
 				// Write the config to disk
-				util.writeConfig(opts.modules[0], configs);
+				util.write(opts.modules[0], configs);
 
 				// Send the response back
 				res.send({
@@ -148,11 +148,11 @@ module.exports = {
 						modules: opts.modules
 					}), req.body.project)
 				});
-			} catch (err) {
-				console.error(err);
+			} catch (error) {
+				console.error(error);
 				res.send({
 					success: false,
-					message: err
+					message: error
 				});
 			}
 		});
@@ -166,6 +166,20 @@ module.exports = {
 		});
 	},
 
+	getProjects(opts) {
+		if (!Array.isArray(opts.modules)) {
+			throw new TypeError('opts.modules should be an array.');
+		}
+
+		if (opts.modules.length === 0) {
+			throw new Error('opts.modules should contain at least one value.');
+		}
+
+		const configs = util.getLocalUserConfig(opts.modules);
+
+		return Object.keys(configs);
+	},
+
 	getConfig(opts) {
 		// Set defaults
 		const defaults = {
@@ -173,13 +187,12 @@ module.exports = {
 		};
 		opts = Object.assign(defaults, opts);
 
-		// Validate arguments
 		if (!Array.isArray(opts.modules)) {
-			throw new TypeError('modules should be an array.');
+			throw new TypeError('opts.modules should be an array.');
 		}
 
 		if (opts.modules.length === 0) {
-			throw new TypeError('modules should contain at least one value.');
+			throw new Error('opts.modules should contain at least one value.');
 		}
 
 		// Get the local config
@@ -195,21 +208,64 @@ module.exports = {
 
 			return jsonMapping.map(configs[opts.project], opts.mapping);
 		}
+
 		return configs;
 	},
 
-	getProjects(opts) {
-		// Validate arguments
+	getFile(opts) {
+		// Set defaults
+		const defaults = {
+			mapping: []
+		};
+		opts = Object.assign(defaults, opts);
+
 		if (!Array.isArray(opts.modules)) {
-			throw new TypeError('modules should be an array.');
+			throw new TypeError('opts.modules should be an array.');
 		}
 
 		if (opts.modules.length === 0) {
-			throw new TypeError('modules should contain at least one value.');
+			throw new Error('opts.modules should contain at least one value.');
 		}
 
-		const configs = util.getLocalUserConfig(opts.modules);
+		if (typeof opts.filename === 'undefined') {
+			throw new TypeError('opts.filename is required.');
+		}
 
-		return Object.keys(configs);
+		// Get the local config
+		const filePath = path.resolve(util.getLocalUserConfigPath(opts.modules[0], opts.filename));
+
+		try {
+			const fileContent = fs.readFileSync(filePath, 'utf8');
+			return fileContent;
+		} catch (error) {
+			return '';
+		}
+	},
+
+	setFile(opts) {
+		// Set defaults
+		const defaults = {
+			mapping: []
+		};
+		opts = Object.assign(defaults, opts);
+
+		if (!Array.isArray(opts.modules)) {
+			throw new TypeError('opts.modules should be an array.');
+		}
+
+		if (opts.modules.length === 0) {
+			throw new Error('opts.modules should contain at least one value.');
+		}
+
+		if (typeof opts.content === 'undefined') {
+			throw new TypeError('opts.content is required.');
+		}
+
+		if (typeof opts.filename === 'undefined') {
+			throw new TypeError('opts.filename is required.');
+		}
+
+		// Write the content to disk
+		util.write(opts.modules[0], opts.content, opts.filename);
 	}
 };
