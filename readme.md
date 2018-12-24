@@ -13,13 +13,15 @@ On Linux, npc saves the file in the root folder. Example: `~/yourModuleName`
 You can retrieve this file (your project configuration) at any time.
 
 ## Install
+
 ```
 npm install node-package-configurator
 ```
 
 ## Usage
 
-#### Launch the form
+### Launch the form
+
 ```javascript
 const npc = require('node-package-configurator');
 const schema = require('path_to_your_json_schema');
@@ -32,7 +34,8 @@ npc.init({
 });
 ```
 
-#### Getting the config
+### Getting the config
+
 ```javascript
 const npc = require('node-package-configurator');
 
@@ -43,6 +46,7 @@ npc.getConfig({
 ```
 
 ## Options
+
 Name | Type | Default | Description
 --- | --- | --- | ---
 module | array | | List of module names, in order of priority.
@@ -51,17 +55,23 @@ project | string | | Name of the project
 jsonSchema | object | | JSON Schema to use in the form
 
 ## Methods
+
 Name | Type | Returns | Description
 --- | --- | --- | ---
 init | function | | Initializes the HTML form
 getConfig | function | object | Returns the configuration object of the given project
 getProjects | function | array | Returns an array of available project names
+getFile | function | object | Returns a file for your npm module from the file system (AppData for Windows, root otherwise)
+setFile | function | object | Writes a file for your npm module in the file system (AppData for Windows, root otherwise)
 
 ## Changelog
+
 [See changelog.](changelog.md)
 
 ## Special thanks to
+
 [Brutusin json-forms](https://github.com/brutusin/json-forms)
 
 ## License
+
 MIT © [Vincent Morneau](http://vmorneau.me)
